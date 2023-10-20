@@ -7,7 +7,7 @@ The Employee Bonus Calculator is a C++ program that calculates the bonus pay for
 
 Features
 
--Allows the user to input the details of multiple managers, including their names, hourly wages, hours worked, and bonuses. \n
+-Allows the user to input the details of multiple managers, including their names, hourly wages, hours worked, and bonuses. <br>
 -Calculates the total pay for each manager by combining their regular wage and bonus.
 -Identifies the manager with the highest pay and displays their name and pay amount.
 -Computes the average pay for all managers and displays the result.
