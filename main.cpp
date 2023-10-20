@@ -1,21 +1,18 @@
-//Umair Iqbal
-//This program uses Employee class which inherits Manager class and calculate bonus pay
-
-
-#include "Employee.h"    // Include the Employee class header file
-#include "Manager.h"     // Include the Manager class header file
-#include <iostream>      // Include the standard input/output stream library
-#include <string>        // Include the string library for string manipulation
+#include "Employee.h"
+#include "Manager.h"
+#include <iostream>
+#include <string>
+#include <iomanip> // Include the header for formatting output
 
 int main()
 {
-    using namespace std;  // Allow the use of symbols from the std namespace without explicitly qualifying them
+    using namespace std;
 
     cout << "Enter number of managers: ";
-    int manager_no;        // Declare a variable to store the number of managers
-    cin >> manager_no;     // Read the number of managers from the user
+    int manager_no;
+    cin >> manager_no;
 
-    Manager *ptr[manager_no];  // Declare an array of pointers to Manager objects to store manager data
+    Manager *ptr[manager_no];
     int i;
 
     for (i = 0; i < manager_no; i++)
@@ -25,58 +22,53 @@ int main()
         int bonus;
 
         cout << "Enter manager " << i << " name: ";
-        cin.ignore(); // Consume the newline character left in the input buffer
-        getline(cin, name, '\n');  // Read the manager's name with spaces
-
+        cin.ignore();
+        getline(cin, name, '\n');
         cout << "Enter manager " << i << " hourly wage: ";
-        cin >> wage;   // Read the manager's hourly wage
-
+        cin >> wage;
         cout << "Enter manager " << i << " hours worked: ";
-        cin >> hours;  // Read the number of hours worked by the manager
-
+        cin >> hours;
         cout << "Enter manager " << i << " bonus: ";
-        cin >> bonus;  // Read the bonus amount for the manager
+        cin >> bonus;
 
-        ptr[i] = new Manager(name, wage, hours, bonus);  // Create a new Manager object and store its address in the array
+        ptr[i] = new Manager(name, wage, hours, bonus);
     }
 
-    double maxPay = 0;  // Variable to store the maximum pay
-    double totalPay = 0;  // To calculate the total pay of all managers
-    int maxPayIndex = -1;  // Index of the manager with the maximum pay
+    double maxPay = 0;
+    double totalPay = 0;
+    int maxPayIndex = -1;
 
     for (int i = 0; i < manager_no; i++)
     {
-        double pay = ptr[i]->calcPay();  // Calculate the pay for the manager
-        totalPay += pay;  // Add the manager's pay to the total pay
+        double pay = ptr[i]->calcPay();
+        totalPay += pay;
 
         if (pay > maxPay)
         {
-            maxPay = pay;  // Update the maximum pay if the current manager's pay is higher
-            maxPayIndex = i;  // Update the index of the manager with the maximum pay
+            maxPay = pay;
+            maxPayIndex = i;
         }
     }
 
     if (maxPayIndex != -1)
     {
-        cout << "Max paid is " << maxPay << " for " << ptr[maxPayIndex]->getName() << endl;  // Print the manager with the maximum pay
+        cout << "Max paid is $" << fixed << setprecision(2) << maxPay << " for " << ptr[maxPayIndex]->getName() << endl;
     }
 
-    // Calculate and print the average pay
     if (manager_no > 0)
     {
-        double averagePay = totalPay / manager_no;  // Calculate the average pay
-        cout << "Average pay for all managers: " << averagePay << endl;  // Print the average pay
+        double averagePay = totalPay / manager_no;
+        cout << "Average pay for all managers: $" << fixed << setprecision(2) << averagePay << endl;
     }
     else
     {
         cout << "No managers to calculate the average pay." << endl;
     }
 
-    // Deallocate memory for the Manager objects
     for (int i = 0; i < manager_no; i++)
     {
-        delete ptr[i];  // Free the memory allocated for each Manager object
+        delete ptr[i];
     }
 
-    return 0;  // Return 0 to indicate successful execution
+    return 0;
 }
